@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Book</title>
+  <link rel="stylesheet" href="/styles/modify.css">
+</head>
+
+<body>
+
+  <nav class="nav-header">
+    <a href="/"><img src="/svg/main-svg(books).svg" height="80px" width="80px" alt="books-svg" style="margin-right: 20px;"></a>
+    <h1>Books & Notes</h1>  
+  </nav>
+  <div class="container">
+    <h1>
+      <%= heading %>
+    </h1>
+
+    <% if (locals.book) { %>
+      <form action="/api/books/<%= book.id %>" method="post">
+       
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="10" ><br><br>
+
+        <label for="summary">Summary:</label><br>
+        <textarea id="summary" name="summary" rows="4" cols="50"></textarea><br><br>
+
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes" rows="4" cols="50" ></textarea><br><br>
+
+        <button type="submit"><%= submit %></button>
+    </form>
+    <% } else { %>
+
+      <form action="/api/books" method="post">
+        <label for="book_title">Book Title:</label>
+        <input type="text" id="book_title" name="book_title" required><br><br>
+
+        <label for="book_author">Book Author:</label>
+        <input type="text" id="book_author" name="book_author" required><br><br>
+
+        <label for="date">Date Read:</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="10" required><br><br>
+
+        <label for="summary">Summary:</label><br>
+        <textarea id="summary" name="summary" rows="4" cols="50" required></textarea><br><br>
+
+        <label for="notes">Notes:</label><br>
+        <textarea id="notes" name="notes" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="submit"><%= submit %></button>
+    </form>
+  <% } %>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Notes</title>
+    <link rel="stylesheet" href="/styles/book.css">
+</head>
+<body style="background-color: rgb(202, 208, 210);"  class="body-container">
+
+    <nav class="nav-header">
+        <a href="/"><img src="/svg/main-svg(books).svg" height="80px" width="80px" alt="books-svg" style="margin-right: 20px;"></a>
+        <h1> Books & Notes</h1>  
+    </nav>
+    <main >
+    <div class="container">
+    
+    <% if (locals.book) {%>
+
+        <section class="books" >
+        <form action="/api/books/<%= book.id %>" method="post"">
+        <ul class="book-container" >
+            <li class="book-gap">
+                <figure class="float-left">
+                    <a href="#"><img src="<%= 'https://covers.openlibrary.org/b/isbn/'+book.isbn+'.jpg' %>" alt="book-cover" loading="lazy" height="200" width="135"></a>
+                </figure>
+           
+                
+                    <h2> <%= book.book_title %> - BY <%= book.book_author %> </h2>
+                    <p>ISBN Id: <br> <%= book.isbn %></p>
+                    <p><strong>Date Read:</strong> <br> <%= book.date %> <strong>Rating:</strong> <%= book.rating %></p>
+                    <p><strong>Summary:</strong> <br> <%= book.summary %></p>
+                    <p><strong>Notes: </strong> <br> <%= book.notes %></p>
+              </li>
+        </ul>
+        </form>
+        </section> 
+        <% } %>
+    </div>
+    </main>
+
+
+</body>
+</html>
