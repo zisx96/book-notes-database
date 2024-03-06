@@ -13,6 +13,7 @@ To run this project, you will need the following dependencies:
 - PostgreSQL (pgAdmin 4)
 - Axios
 - Nodemon
+- Body-Parser
 
 
 ## Installation
