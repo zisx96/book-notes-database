@@ -27,10 +27,10 @@
            
                 
                     <h2> <%= book.book_title %> - BY <%= book.book_author %> </h2>
-                    <p>ISBN Id: <br> <%= book.isbn %></p>
-                    <p><strong>Date Read:</strong> <br> <%= book.date %> <strong>Rating:</strong> <%= book.rating %></p>
-                    <p><strong>Summary:</strong> <br> <%= book.summary %></p>
-                    <p><strong>Notes: </strong> <br> <%= book.notes %></p>
+                    <p><strong>ISBN Id: </strong> <br> <br> <%= book.isbn %></p>
+                    <p><strong>Date Read:</strong> <br> <br> <%= book.date %> <br> <br><strong>Rating:</strong> <%= book.rating %></p>
+                    <p><br> <%= book.summary %></p>
+                    <p><strong>Notes: </strong> <br><pre><%= book.notes %></pre> </p>
               </li>
         </ul>
         </form>

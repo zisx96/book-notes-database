@@ -70,3 +70,7 @@ body {
     margin: 20px; /* Adjust as needed */
     padding: 20px; /* Adjust padding for each book */
 }
+
+pre{
+    font-family: Arial, sans-serif;
+}
