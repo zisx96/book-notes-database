@@ -11,8 +11,8 @@ const port = 4000;
 const db  = new pg.Client({
     user:"postgres",
     host:"localhost",
-    database:"projects",
-    password:"YASH",
+    database:"your_database",
+    password:"your_password",
     port:5432,
 });
 
@@ -109,15 +109,28 @@ app.post("/books", async (req, res) => {
     const isbn = await getISBNFromTitle(book_title);
 
     try {
+        // Convert the book title to lowercase and trim leading/trailing spaces
+        const normalizedTitle = book_title.trim().toLowerCase();
+
+        // Check for existing book titles (case-insensitive)
+        const existingBook = await db.query("SELECT * FROM book_notes WHERE LOWER(TRIM(book_title)) = $1", [normalizedTitle]);
+
+        if (existingBook.rows.length > 0) {
+            // If the book title already exists, return an error response
+            return res.status(400).json({ message: "Book title already exists" });
+        }
+
         // Replace newline characters with <br> tags
         const formattedSummary = summary.replace(/\n/g, '<br>');
 
+        // Insert the new book into the database
         await db.query("INSERT INTO book_notes (book_title, book_author, date, rating, summary, notes, isbn) VALUES ($1, $2, $3, $4, $5, $6, $7)",
             [book_title, book_author, new Date(), rating, formattedSummary, notes, isbn]);
     
         // Fetch the last inserted row (assuming there's an auto-incremented ID)
         const insertedData = await db.query("SELECT * FROM book_notes ORDER BY id DESC LIMIT 1");
         const book = insertedData.rows[0];
+
         // Send the fetched data as JSON in the response
         res.status(201).json(book);
     } catch (error) {

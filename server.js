@@ -119,7 +119,7 @@ app.post("/api/books", async (req, res) => {
         console.log(response.data);
         res.redirect("/")
     }   catch (error) {
-        res.status(500).json({message: "error adding book"});
+        res.status(500).json({message: "error adding book or already exists"});
     }
 });
 
