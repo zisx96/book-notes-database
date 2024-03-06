@@ -18,7 +18,7 @@ To run this project, you will need the following dependencies:
 
 ## Installation
 
-1. **Install Node.js** and npm: Ensure you have Node.js and npm installed on your system. If not, 
+1. **Install Node.js** and **npm**: Ensure you have Node.js and npm installed on your system. If not, 
 download and install them from the official Node.js website.
 
 2. **Install project dependencies**: After installing Node.js, navigate to your project directory in the terminal and run the following command to install dependencies: **npm install**. This command will install all required dependencies listed in the package.json file.
