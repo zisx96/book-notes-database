@@ -25,6 +25,7 @@ download and install them from the official Node.js website.
 
 3. **Set up PostgreSQL database**: Use pgAdmin 4 or any other PostgreSQL client to create a database and the necessary table schema. Here's an example schema for storing book notes:
 
+```sql
 CREATE TABLE IF NOT EXISTS book_notes (
     id SERIAL PRIMARY KEY,
     book_title VARCHAR(255) NOT NULL,
@@ -35,7 +36,7 @@ CREATE TABLE IF NOT EXISTS book_notes (
     notes TEXT NOT NULL,
     isbn TEXT
 );
-
+```
 4. **Configure database connection**: In the index.js file, update the PostgreSQL client configuration with your own database connection information.
 
 
