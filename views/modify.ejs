@@ -2,58 +2,80 @@
 <html lang="en">
 
 <head>
+  <!-- Meta tags for character set and viewport -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the page -->
   <title>Add Book</title>
+  <!-- Link to the external CSS file -->
   <link rel="stylesheet" href="/styles/modify.css">
 </head>
 
 <body>
 
+  <!-- Navigation section -->
   <nav class="nav-header">
+    <!-- Link to the homepage with a books image -->
     <a href="/"><img src="/svg/main-svg(books).svg" height="80px" width="80px" alt="books-svg" style="margin-right: 20px;"></a>
+    <!-- Heading of the page -->
     <h1>Books & Notes</h1>  
   </nav>
+
+  <!-- Main content container -->
   <div class="container">
+    <!-- Heading for the page -->
     <h1>
       <%= heading %>
     </h1>
 
+    <!-- Form section - Displayed if there's a book object -->
     <% if (locals.book) { %>
       <form action="/api/books/<%= book.id %>" method="post">
        
+        <!-- Input field for rating -->
         <label for="rating">Rating:</label>
         <input type="number" id="rating" name="rating" min="1" max="10" value="<%= book.rating %>"><br><br>
 
+        <!-- Textarea field for summary -->
         <label for="summary">Summary:</label><br>
         <textarea id="summary" name="summary" rows="4" cols="50"><%= book.summary %></textarea><br><br>
 
+        <!-- Textarea field for notes -->
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes" rows="4" cols="50" ><%= book.notes %></textarea><br><br>
 
+        <!-- Submit button -->
         <button type="submit"><%= submit %></button>
     </form>
     <% } else { %>
 
+      <!-- Form section - Displayed if there's no book object -->
       <form action="/api/books" method="post">
+        <!-- Input field for book title -->
         <label for="book_title">Book Title:</label>
         <input type="text" id="book_title" name="book_title" required><br><br>
 
+        <!-- Input field for book author -->
         <label for="book_author">Book Author:</label>
         <input type="text" id="book_author" name="book_author" required><br><br>
 
+        <!-- Input field for date read -->
         <label for="date">Date Read:</label>
         <input type="date" id="date" name="date" required><br><br>
 
+        <!-- Input field for rating -->
         <label for="rating">Rating:</label>
         <input type="number" id="rating" name="rating" min="1" max="10" required><br><br>
 
+        <!-- Textarea field for summary -->
         <label for="summary">Summary:</label><br>
         <textarea id="summary" name="summary" rows="4" cols="50" required></textarea><br><br>
 
+        <!-- Textarea field for notes -->
         <label for="notes">Notes:</label><br>
         <textarea id="notes" name="notes" rows="4" cols="50" required></textarea><br><br>
 
+        <!-- Submit button -->
         <button type="submit"><%= submit %></button>
     </form>
   <% } %>
@@ -61,3 +83,4 @@
 </body>
 
 </html>
+

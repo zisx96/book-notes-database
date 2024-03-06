@@ -1,13 +1,14 @@
+// Import necessary modules
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import axios from "axios";
 
-
-
+// Initialize Express application
 const app = express();
 const port = 4000;
 
+// Create a PostgreSQL client
 const db  = new pg.Client({
     user:"postgres",
     host:"localhost",
@@ -16,15 +17,18 @@ const db  = new pg.Client({
     port:5432,
 });
 
+// Connect to the PostgreSQL database
 db.connect();
 
+// Array to store book notes data
 let book_notes = [];
 
+// Middleware setup
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-// function to get the isbn id for the book
+// Function to get the ISBN from the book title using OpenLibrary API
 async function getISBNFromTitle(title) {
     try {
         const response = await axios.get(`https://openlibrary.org/search.json?title=${title}`);
@@ -41,8 +45,7 @@ async function getISBNFromTitle(title) {
     }
 };
 
-// get all books
-
+// Route to get all books
 app.get("/books", async (req, res) => { 
 
     const result = await db.query("SELECT id,book_title,book_author,date,rating,summary,isbn FROM book_notes ORDER BY id ASC");
@@ -50,7 +53,8 @@ app.get("/books", async (req, res) => {
     res.json(book_notes);
 });
 
-// sort by book title
+// Routes to sort books by different criteria
+// Sort by book title
 app.get("/books/sort/title", async (req, res) => {
     try {
         const result = await db.query("SELECT id, book_title, book_author, date, rating, summary, isbn FROM book_notes ORDER BY book_title ASC");
@@ -62,7 +66,7 @@ app.get("/books/sort/title", async (req, res) => {
     }
 });
 
-// sort by latest book read
+// Sort by latest book read
 app.get("/books/sort/newest", async (req, res) => {
     try {
         const result = await db.query("SELECT id, book_title, book_author, date, rating, summary, isbn FROM book_notes ORDER BY date DESC");
@@ -74,7 +78,7 @@ app.get("/books/sort/newest", async (req, res) => {
     }
 });
 
-// sort by ratings
+// Sort by ratings
 app.get("/books/sort/rating", async (req, res) => {
     try {
         const result = await db.query("SELECT id, book_title, book_author, date, rating, summary, isbn FROM book_notes ORDER BY rating DESC");
@@ -109,10 +113,10 @@ app.post("/books", async (req, res) => {
     const isbn = await getISBNFromTitle(book_title);
 
     try {
-        // Convert the book title to lowercase and trim leading/trailing spaces
+        // Convert the book title to lowercase and trim 
         const normalizedTitle = book_title.trim().toLowerCase();
 
-        // Check for existing book titles (case-insensitive)
+        // Check for existing book titles 
         const existingBook = await db.query("SELECT * FROM book_notes WHERE LOWER(TRIM(book_title)) = $1", [normalizedTitle]);
 
         if (existingBook.rows.length > 0) {

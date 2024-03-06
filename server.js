@@ -1,16 +1,19 @@
+// Import necessary modules
 import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
 
+// Initialize Express application
 const app  = express();
 const port = 3000;
 const API_URL = "http://localhost:4000";
 
-
+// Middleware setup
 app.use(bodyParser.urlencoded( { extended: true }));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
+// to get all books
 app.get("/", async (req, res) => {
 
     try{
@@ -25,7 +28,7 @@ app.get("/", async (req, res) => {
 
 });
 
-// server get sort on title
+// Route to sort books title
 app.get("/title", async (req, res) => {
 
     try{
@@ -40,7 +43,7 @@ app.get("/title", async (req, res) => {
 
 });
 
-// server get sort on latest book
+// Route to sort books by latest book
 app.get("/latest", async (req, res) => {
 
     try{
@@ -55,7 +58,7 @@ app.get("/latest", async (req, res) => {
 
 });
 
-// server get sort on highest rating
+// Route to sort books on highest rating
 app.get("/highest", async (req, res) => {
 
     try{
@@ -70,12 +73,14 @@ app.get("/highest", async (req, res) => {
 
 });
 
+// Route to render book.ejs
 app.get("/views", (req,res) => {
 
     res.render("book.ejs");
 
 });
 
+// Route to get a specific book by ID
 app.get("/views/:id", async (req, res) => {
 
     try{
@@ -90,13 +95,15 @@ app.get("/views/:id", async (req, res) => {
 
 });
 
+
+// Route to render modify.ejs for adding a new book
 app.get("/new", (req, res) => {
 
     res.render("modify.ejs", { heading: "New Book", submit: "ADD Book"})
 
 });
 
-
+// Route to render modify.ejs for editing a book
 app.get("/edit/:id", async (req, res) => {
     try {
       const response = await axios.get(`${API_URL}/books/${req.params.id}`);
@@ -111,7 +118,7 @@ app.get("/edit/:id", async (req, res) => {
     }
 });
 
-// new book
+// add new book
 app.post("/api/books", async (req, res) => {
     
     try{
