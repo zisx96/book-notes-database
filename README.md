@@ -1,13 +1,28 @@
 # book-notes-database
 
-Required Dependencies: Express.js, Ejs, Node.js, PostgreSQL(pgAdmin 4 used), axios, nodemon. 
+Welcome to the Book Notes Database project! This project aims to provide a convenient way to store, manage, and access your book notes using a PostgreSQL database and a user-friendly web interface.
 
-First install node from web.
-Then install the dependencies as npm i package_name or npm install package_name.
-Eg: npm i express, npm i ejs, npm i pg, etc. (In terminal)
 
-For database used pgAdmin 4:
-Create an postgres table schema as:
+## Dependencies
+
+To run this project, you will need the following dependencies:
+
+- Express.js
+- Ejs
+- Node.js
+- PostgreSQL (pgAdmin 4)
+- Axios
+- Nodemon
+
+
+## Installation
+
+1. **Install Node.js** and npm: Ensure you have Node.js and npm installed on your system. If not, 
+download and install them from the official Node.js website.
+
+2. **Install project dependencies**: After installing Node.js, navigate to your project directory in the terminal and run the following command to install dependencies: **npm install**. This command will install all required dependencies listed in the package.json file.
+
+3. **Set up PostgreSQL database**: Use pgAdmin 4 or any other PostgreSQL client to create a database and the necessary table schema. Here's an example schema for storing book notes:
 
 CREATE TABLE IF NOT EXISTS book_notes (
     id SERIAL PRIMARY KEY,
@@ -20,7 +35,23 @@ CREATE TABLE IF NOT EXISTS book_notes (
     isbn TEXT
 );
 
-After creating table there are two files index.js and server.js.
-In index.js in the created postgres client assign your own database info.
+4. **Configure database connection**: In the index.js file, update the PostgreSQL client configuration with your own database connection information.
 
-The server.js is an api intergration to GET endpoints with api and uses Axios to send http request and handle responses.
+
+## Running the Project
+
+After installing dependencies and configuring the database, you can start the server using Nodemon:
+
+1. Open two terminals.
+   
+2. In the first terminal, run: **nodemon index.js**. This command starts the API server.
+
+3. In the second terminal, run: **nodemon server.js**. This command starts the server for handling web requests.
+
+Once both servers are running, you can access the web interface by navigating to localhost:3000 in your web browser.
+
+Enjoy organizing and managing your book notes with ease using the Book Notes Database project!
+
+
+
+
