@@ -14,6 +14,7 @@ To run this project, you will need the following dependencies:
 - Axios
 - Nodemon
 - Body-Parser
+- dotenv
 
 
 ## Installation
